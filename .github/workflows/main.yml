@@ -31,6 +31,6 @@ jobs:
         username: ${{ secrets.username }}
         token: ${{ secrets.token }}
       run: |
-         cd /home/xiaoyan
+         cd ${{ $GITHUB_WORKSPACE }}
          behave --format behave_html_formatter:HTMLFormatter
       
