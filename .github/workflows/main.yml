@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -23,14 +23,18 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-#    - name: Test with behave
-#      env :
-#        host: ${{ secrets.host }}
-#        password: ${{ secrets.password }}
-#        port: ${{ secrets.port }}
-#        username: ${{ secrets.username }}
-#        token: ${{ secrets.token }}
-#      run: |
-#         cd $GITHUB_WORKSPACE
-#         behave --format behave_html_formatter:HTMLFormatter
+
+  job2:
+    needs: job1
+    steps:
+    - name: Test with behave
+      env :
+        host: ${{ secrets.host }}
+        password: ${{ secrets.password }}
+        port: ${{ secrets.port }}
+        username: ${{ secrets.username }}
+        token: ${{ secrets.token }}
+      run: |
+         cd $GITHUB_WORKSPACE
+         behave --format behave_html_formatter:HTMLFormatter
       
