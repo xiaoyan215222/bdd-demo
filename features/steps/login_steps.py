@@ -13,7 +13,7 @@ text_context={
 def step_impl(context):
     context.driver=webdriver.Chrome()
     context.driver.get("https://eaton-sc-web.houyuzhu.com.cn:81/#/login")
-    sleep(1)
+    sleep(3)
 
 
 @when("输入正确用户名和正确密码")
