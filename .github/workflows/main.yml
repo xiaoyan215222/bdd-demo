@@ -24,13 +24,13 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Test with behave
-      with :
+      env :
         host: ${{ secrets.host }}
         password: ${{ secrets.password }}
         port: ${{ secrets.port }}
         username: ${{ secrets.username }}
         token: ${{ secrets.token }}
       run: |
-         cd /home/xiaoyan/
+         cd /workspace
          behave --format behave_html_formatter:HTMLFormatter
       
