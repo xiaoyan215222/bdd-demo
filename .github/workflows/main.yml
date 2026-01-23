@@ -23,11 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    steps:
     - name: Test with behave
       env :
         host: ${{ secrets.host }}
