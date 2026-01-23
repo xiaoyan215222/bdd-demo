@@ -21,18 +21,19 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: Test with pytest
-      run: |
-         cd /home/xiaoyan/
-         behave --format behave_html_formatter:HTMLFormatter
-      with:
         host: ${{ secrets.host }}
         password: ${{ secrets.password }}
         port: ${{ secrets.port }}
         username: ${{ secrets.username }}
         token: ${{ secrets.token }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+
+    - name: Test with pytest
+      run: |
+         cd /home/xiaoyan/
+         behave --format behave_html_formatter:HTMLFormatter
+      
