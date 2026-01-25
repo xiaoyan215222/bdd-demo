@@ -81,4 +81,7 @@ jobs:
           测试状态：${{ job.status }}
           运行时长：${{ job.duration }}
           查看详情：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        # 发件人、收件人
+        from: "GitHub Actions"
+        to: ${{ secrets.EMAIL_RECEIVER }}
 
