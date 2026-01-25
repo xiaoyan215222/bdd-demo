@@ -52,7 +52,7 @@ jobs:
          chromium-browser --version
          chromedriver --version
          # 执行behave测试
-         behave --format behave_html_formatter:HTMLFormatter
+         behave --format behave_html_formatter:HTMLFormatter -o reports/test_login.html
 
     # 可选：上传测试报告和失败截图
     - name: Upload test report
@@ -60,5 +60,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-report
-        path: test-report.html
+        path: reports/test-login.html
       
