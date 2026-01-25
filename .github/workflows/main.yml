@@ -61,4 +61,24 @@ jobs:
       with:
         name: test-report
         path: reports/test-login.html
-      
+
+    # 新增：发送测试结果邮件（纯文本）
+    - name: Send test result email
+      if: always()  # 无论测试成功/失败都发送
+      uses: dawidd6/action-send-mail@v3
+      with:
+        # 邮箱SMTP配置（以QQ邮箱为例，其他邮箱需修改SMTP服务器和端口）
+        server_address: smtp.163.com
+        server_port: 465
+        # 邮箱账号和授权码（需先在GitHub Secrets中配置）
+        username: ${{ secrets.EMAIL_USERNAME }}  # 如：123456@qq.com
+        password: ${{ secrets.EMAIL_PASSWORD }}  # QQ邮箱的授权码（不是登录密码）
+        # 邮件内容
+        subject: "Behave测试结果 - ${{ github.repository }} - ${{ job.status }}"
+        body: |
+          测试分支：${{ github.ref_name }}
+          提交信息：${{ github.event.head_commit.message }}
+          测试状态：${{ job.status }}
+          运行时长：${{ job.duration }}
+          查看详情：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
