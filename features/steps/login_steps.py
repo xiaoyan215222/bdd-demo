@@ -37,7 +37,7 @@ def step_impl(context):
 def step_impl(context):
     sleep(3)
     url=context.driver.current_url
-    logging.info(msg=f"返回url为{url}")
+    logging.info(msg=f"返回url为修改{url}")
     assert url=='https://eaton-sc-web.houyuzhu.com.cn:81/#/models'
 
 @then("登录失败")
