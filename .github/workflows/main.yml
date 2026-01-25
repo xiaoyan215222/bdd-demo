@@ -18,6 +18,15 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+
+    # 关键新增步骤1：安装Chrome浏览器（Ubuntu运行器）
+    - name: Install Chrome browser
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser chromium-chromedriver
+        # 配置ChromeDriver路径到系统环境变量
+        export PATH=$PATH:/usr/lib/chromium-browser/
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -32,5 +41,9 @@ jobs:
         token: ${{ secrets.token }}
       run: |
          cd $GITHUB_WORKSPACE
+         # 执行测试前，确认Chrome和ChromeDriver可用
+         chromium-browser --version
+         chromedriver --version
+         # 执行behave测试
          behave --format behave_html_formatter:HTMLFormatter
       
