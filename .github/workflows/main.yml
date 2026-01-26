@@ -52,7 +52,7 @@ jobs:
          chromium-browser --version
          chromedriver --version
          # 执行behave测试
-         behave --format behave_html_formatter:HTMLFormatter -o test_login.html
+         behave --format behave_html_formatter:HTMLFormatter -o reports/test_login.html
 
     # 在 upload-artifact 步骤前添加此步骤，用于排查文件路径
     - name: check report exisit or not
@@ -70,8 +70,8 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report
-        path: test_login.html
+        name: test_login
+        path: reports/test_login.html
 
     # 新增：发送测试结果邮件（纯文本）
     - name: Send test result email
