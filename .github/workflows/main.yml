@@ -60,7 +60,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-report
-        path: reports/test-login.html
+        path: test-login.html
 
     # 新增：发送测试结果邮件（纯文本）
     - name: Send test result email
