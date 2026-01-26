@@ -54,6 +54,17 @@ jobs:
          # 执行behave测试
          behave --format behave_html_formatter:HTMLFormatter -o test_login.html
 
+    # 在 upload-artifact 步骤前添加此步骤，用于排查文件路径
+    - name: 检查文件是否存在
+      run: |
+       echo "当前工作目录：$(pwd)"
+       echo "-------------------------"
+       # 递归列出所有文件，方便查找 test-login.html
+       find . -name "test-login.html"
+       echo "-------------------------"
+      # 列出当前目录下的文件
+       ls -la
+
     # 可选：上传测试报告和失败截图
     - name: Upload test report
       if: always()
