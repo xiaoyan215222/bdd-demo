@@ -1,5 +1,4 @@
-from selenium import webdriver
+import os
+import sys
 
-driver=webdriver.Chrome()
-driver.get("https://eaton-sc-web.houyuzhu.com.cn:81/#/login")
-print(driver.current_url)
+os.getenv()
