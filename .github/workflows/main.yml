@@ -55,12 +55,12 @@ jobs:
          behave --format behave_html_formatter:HTMLFormatter -o test_login.html
 
     # 在 upload-artifact 步骤前添加此步骤，用于排查文件路径
-    - name: 检查文件是否存在
+    - name: check report exisit or not
       run: |
        echo "当前工作目录：$(pwd)"
        echo "-------------------------"
-       # 递归列出所有文件，方便查找 test-login.html
-       find . -name "test-login.html"
+       # 递归列出所有文件，方便查找 test_login.html
+       find . -name "test_login.html"
        echo "-------------------------"
        # 列出当前目录下的文件
        ls -la
@@ -71,7 +71,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-report
-        path: test-login.html
+        path: test_login.html
 
     # 新增：发送测试结果邮件（纯文本）
     - name: Send test result email
