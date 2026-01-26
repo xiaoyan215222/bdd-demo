@@ -29,12 +29,13 @@ def step_impl(context):
         chrome_options.binary_location = "/usr/bin/chromium-browser"
         # 3.显示指定ChromeDriver路径（匹配CI环境的驱动路径）
         chrome_service = Service(executable_path="/usr/bin/chromedriver")
-    # 4初始化驱动（指定service和options,而非空参数）
-    try:
-        context.driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    except Exception as e:
-        print(f"Chrome驱动初始化失败:{str(e)}")
-        raise
+        # 4初始化驱动（指定service和options,而非空参数）
+        try:
+            context.driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        except Exception as e:
+            print(f"Chrome驱动初始化失败:{str(e)}")
+            raise
+
     context.driver.get("https://eaton-sc-web.houyuzhu.com.cn:81/#/login")
     sleep(3)
 
@@ -50,6 +51,11 @@ def step_impl(context):
     context.driver.find_element(By.XPATH, '//input[@placeholder="请输入用户名"]').send_keys("xiaoyan")
     context.driver.find_element(By.XPATH, '//input[@placeholder="请输入密码"]').send_keys("xiaoyanA")
 
+
+@when("输入空的用户名和密码")
+def step_impl(context):
+    context.driver.find_element(By.XPATH, '//input[@placeholder="请输入用户名"]').send_keys("xiaoyan")
+    context.driver.find_element(By.XPATH, '//input[@placeholder="请输入密码"]').send_keys("xiaoyanA")
 
 
 @when("点击登录")

@@ -14,3 +14,11 @@ Feature:用户登录功能
     When  输入正确用户名和错误密码
     And   点击登录
     Then  登录失败
+
+
+  @skip
+  Scenario:密码错误，提示空的用户名和密码
+    Given 系统已启动，且登录页面可以访问
+    When  输入空的用户名和密码
+    And   点击登录
+    Then  登录失败
