@@ -4,6 +4,13 @@ on:
   push:
     branches: [ "main" ]
 
+# 核心添加：提升GITHUB_TOKEN权限
+permissions:
+  contents: write  # 允许写入仓库内容（包括推送分支）
+  pages: write     # 允许操作GitHub Pages
+  id-token: write
+
+
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -72,7 +79,7 @@ jobs:
       with:
         name: test_login
         path: reports/test_login.html
-        if-no-file-found: error
+        if-no-files-found: error
         overwrite: true
 
     # 7. （可选）部署报告到GitHub Pages（在线查看）
