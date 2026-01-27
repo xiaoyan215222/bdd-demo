@@ -82,7 +82,7 @@ jobs:
 #        if-no-files-found: error
 #        overwrite: true
 
-    # 7. （可选）部署报告到GitHub Pages（在线查看）
+    # 7. （可选）测试部署报告到GitHub Pages（在线查看）
     - name: 部署报告到GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       id: deploy-pages #用于确认部署状态
