@@ -72,6 +72,18 @@ jobs:
       with:
         name: test_login
         path: reports/test_login.html
+        if-no-file-found: error
+        overwrite: true
+
+    # 7. （可选）部署报告到GitHub Pages（在线查看）
+    - name: 部署报告到GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      if: github.ref == 'refs/heads/main' # 仅main分支部署
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./reports # 报告所在目录
+        publish_branch: gh-pages # 部署到gh-pages分支
+        force_orphan: true
 
     # 新增：发送测试结果邮件（纯文本）
     - name: Send test result email
@@ -92,6 +104,7 @@ jobs:
           测试状态：${{ job.status }}
           运行时长：${{ job.duration }}
           查看详情：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          报告详情：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         # 发件人、收件人
         from: "GitHub Actions"
         to: ${{ secrets.EMAIL_RECEIVER }}
