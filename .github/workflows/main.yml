@@ -59,7 +59,7 @@ jobs:
          chromium-browser --version
          chromedriver --version
          # 执行behave测试
-         behave --format behave_html_formatter:HTMLFormatter -o reports/test_login.html
+         behave --format behave_html_formatter:HTMLFormatter -o test_login.html
 
     # 在 upload-artifact 步骤前添加此步骤，用于排查文件路径
     - name: check report exisit or not
@@ -73,22 +73,23 @@ jobs:
        ls -la
 
     # 可选：上传测试报告和失败截图
-    - name: Upload test report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test_login
-        path: reports/test_login.html
-        if-no-files-found: error
-        overwrite: true
+#    - name: Upload test report
+#      if: always()
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: test_login
+#        path: test_login.html
+#        if-no-files-found: error
+#        overwrite: true
 
     # 7. （可选）部署报告到GitHub Pages（在线查看）
     - name: 部署报告到GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
+      id: deploy-pages #用于确认部署状态
       if: github.ref == 'refs/heads/main' # 仅main分支部署
       with:
         github_token: ${{ secrets.TOKEN }}
-        publish_dir: ./reports # 报告所在目录
+        publish_dir: ./ # 报告所在目录
         publish_branch: gh-pages # 部署到gh-pages分支
         force_orphan: true
 
@@ -111,7 +112,7 @@ jobs:
           测试状态：${{ job.status }}
           运行时长：${{ job.duration }}
           查看详情：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          报告详情：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          报告详情："https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/test_login.html"
         # 发件人、收件人
         from: "GitHub Actions"
         to: ${{ secrets.EMAIL_RECEIVER }}
