@@ -83,7 +83,7 @@ jobs:
 #        overwrite: true
 
     # 7. （可选）测试部署报告到GitHub Pages（在线查看）
-    - name: 部署报告到GitHub Pages
+    - name: deploy reports to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       id: deploy-pages #用于确认部署状态
       if: github.ref == 'refs/heads/main' # 仅main分支部署
