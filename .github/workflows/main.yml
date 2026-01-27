@@ -89,7 +89,7 @@ jobs:
       if: github.ref == 'refs/heads/main' # 仅main分支部署
       with:
         github_token: ${{ secrets.TOKEN }}
-        publish_dir: ./ # 报告所在目录
+        publish_dir: ./ # 报告所在目录，根目录
         publish_branch: gh-pages # 部署到gh-pages分支
         force_orphan: true
 
